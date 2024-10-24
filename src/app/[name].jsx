@@ -8,77 +8,83 @@ import { useQuery } from "@tanstack/react-query";
 import client from "../graphqlClient";
 import { ActivityIndicator } from "react-native";
 import NewSetInput from "../components/NewSetInput";
+import SetsList from "../components/SetsList";
 
 const exerciseQuery = gql`
-query exercises($name: String) {
-  exercises(name: $name) {
-    name
-    muscle
-    instructions
-    equipment
+  query exercises($name: String) {
+    exercises(name: $name) {
+      name
+      muscle
+      instructions
+      equipment
+    }
   }
-}
-`
+`;
 
 export default function ExerciseDetailsScreen() {
-  const {name} = useLocalSearchParams();
-  const {data, isLoading, error} = useQuery ({
-    queryKey:['exercises', name],
-    queryFn: ()=> client.request(exerciseQuery, {name}),
-  })
+  const { name } = useLocalSearchParams();
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["exercises", name],
+    queryFn: () => client.request(exerciseQuery, { name }),
+  });
 
   const [isInstructionsExpanded, setInstructionsExpanded] = useState(false);
 
   if (isLoading) {
-    return <ActivityIndicator/>;
+    return <ActivityIndicator />;
   }
 
-  if(error) {
-    return<Text>Failed to fetch data</Text>
+  if (error) {
+    return <Text>Failed to fetch data</Text>;
   }
 
- const exercise =data.exercises[0];
+  const exercise = data.exercises[0];
 
   if (!exercise) {
     return <Text>Exercise not found!</Text>;
   }
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
       <Stack.Screen options={{ title: exercise.name }} />
 
-      <View style={styles.panel}>
-        <Text style={styles.exerciseName}>{exercise.name}</Text>
+      <SetsList
+        ListHeaderComponent={() => (
+          <View style= {{gap: 5}}>
+            <View style={styles.panel}>
+              <Text style={styles.exerciseName}>{exercise.name}</Text>
 
-        <Text style={styles.exerciseMuscleandEquipment}>
-          <Text style={styles.subValue}>{exercise.muscle}</Text> |{" "}
-          <Text style={styles.subValue}>{exercise.equipment}</Text>
-        </Text>
-      </View>
+              <Text style={styles.exerciseMuscleandEquipment}>
+                <Text style={styles.subValue}>{exercise.muscle}</Text> |{" "}
+                <Text style={styles.subValue}>{exercise.equipment}</Text>
+              </Text>
+            </View>
 
-      <View style={styles.panel}>
-        <Text
-          style={styles.instructions}
-          numberOfLines={isInstructionsExpanded ? 0 : 3}
-        >
-          {exercise.instructions}
-        </Text>
-        <Text
-          onPress={() => setInstructionsExpanded(!isInstructionsExpanded)}
-          style={styles.seeMore}
-        >
-          {isInstructionsExpanded ? 'See less' : 'See more'}
-        </Text>
-      </View>
+            <View style={styles.panel}>
+              <Text
+                style={styles.instructions}
+                numberOfLines={isInstructionsExpanded ? 0 : 3}
+              >
+                {exercise.instructions}
+              </Text>
+              <Text
+                onPress={() => setInstructionsExpanded(!isInstructionsExpanded)}
+                style={styles.seeMore}
+              >
+                {isInstructionsExpanded ? "See less" : "See more"}
+              </Text>
+            </View>
 
-      <NewSetInput/>
-    </ScrollView>
+            <NewSetInput exerciseName={exercise.name} />
+          </View>
+        )}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    gap: 10,
+    padding: 10
   },
   panel: {
     backgroundColor: "white",

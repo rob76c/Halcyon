@@ -1,0 +1,18 @@
+type InsertSetResponse {
+  id: String
+  message: String
+}
+
+input NewSet {
+  exercise: String!
+  reps: Int!
+  weight: Float
+}
+
+type Mutation {
+  insertSet(document:NewSet!): InsertSetResponse
+    @rest(
+      method: POST
+      endpoint: "https://mxuouhklbpyszq22tifv5fsn3y0aupwt.lambda-url.us-east-2.on.aws/"
+    )
+}
