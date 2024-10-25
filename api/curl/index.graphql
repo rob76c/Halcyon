@@ -6,7 +6,7 @@ type RootEntry {
 }
 
 type Query {
-  sets: [RootEntry]
+  sets(exercise: String): [RootEntry]
     @rest(
       endpoint: "https://2mo3a6x7cx4lmcmcapjxyjfge40xuyjy.lambda-url.us-east-2.on.aws/"
     )
