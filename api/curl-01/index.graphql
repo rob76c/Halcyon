@@ -4,6 +4,7 @@ type InsertSetResponse {
 }
 
 input NewSet {
+  username: String!
   exercise: String!
   reps: Int!
   weight: Float
