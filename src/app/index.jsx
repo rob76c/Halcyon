@@ -2,12 +2,13 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import ExerciseListItem from "../components/ExerciseListItem";
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import { ActivityIndicator } from "react-native";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { ActivityIndicator, Button } from "react-native";
 import { gql } from "graphql-request";
 import client from "../graphqlClient";
 import { Redirect } from "expo-router";
 import { useAuth } from "../providers/AuthContext";
+
 
 
 const exercisesQuery= gql`
@@ -21,12 +22,22 @@ query myQuery($muscle: String, $name: String) {
 `;
 
 export default function ExercisesScreen() {
-  const {data, isLoading, error}= useQuery({
+  const {data, isLoading, error, fetchNextPage, isFetchingNextPage}= useInfiniteQuery({
     queryKey:['exercises'],
     queryFn: () => client.request(exercisesQuery),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, pages) => pages.length* 10, //fix to use offset(only in premium subscription to apininjas) by using passing pageParam to queryFn and setting the offset to pageParam
   });
 
   const{username}= useAuth();
+
+  const loadMore= () => {
+    if (isFetchingNextPage) {
+      return;
+    }
+
+    fetchNextPage();
+  };
 
   if (isLoading) {
     return <ActivityIndicator/>
@@ -40,13 +51,17 @@ export default function ExercisesScreen() {
     return <Redirect href={'/auth'}/>;
   }
   
+  const exercises= data?.pages.flatMap((page)=> page.exercises);
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={data?.exercises}
+        data={exercises}
         contentContainerStyle= {{gap:5}}
         keyExtractor={(item, index)=> item.name+ index}
         renderItem={({ item }) => <ExerciseListItem item={item} />}
+        onEndReachedThreshold={1}// 1 screen size of items left
+        onEndReached={loadMore}
       />
 
       <StatusBar style="auto" />
