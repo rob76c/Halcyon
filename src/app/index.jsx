@@ -71,10 +71,12 @@ export default function ExercisesScreen() {
       <FlatList
         data={exercises}
         contentContainerStyle={{ gap: 5 }}
+        style= {{padding: 10}}
         keyExtractor={(item, index) => item.name + index}
         renderItem={({ item }) => <ExerciseListItem item={item} />}
         onEndReachedThreshold={1} // 1 screen size of items left
         onEndReached={loadMore}
+        contentInsetAdjustmentBehavior="automatic"
       />
 
       <StatusBar style="auto" />
@@ -87,7 +89,5 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: "ghostwhite",
     justifyContent: "center",
-    padding: 10,
-    paddingTop: 150,// change to dynamic solution for the top part cut off
   },
 });
