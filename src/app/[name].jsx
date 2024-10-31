@@ -9,6 +9,7 @@ import client from "../graphqlClient";
 import { ActivityIndicator } from "react-native";
 import NewSetInput from "../components/NewSetInput";
 import SetsList from "../components/SetsList";
+import ProgressGraph from "../components/ProgressGraph";
 
 const exerciseQuery = gql`
   query exercises($name: String) {
@@ -75,6 +76,7 @@ export default function ExerciseDetailsScreen() {
               </Text>
             </View>
 
+            
             <NewSetInput exerciseName={exercise.name} />
           </View>
         )}

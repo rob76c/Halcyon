@@ -68,6 +68,7 @@ export default function ExercisesScreen() {
           },
         }}
       />
+      
       <FlatList
         data={exercises}
         contentContainerStyle={{ gap: 5 }}
