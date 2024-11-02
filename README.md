@@ -12,7 +12,7 @@
 
 ## Setup
 
-1. 
+1. Clone Repo
    ```bash
    git clone https://github.com/rob76c/Halcyon.git
    cd Halcyon
@@ -29,43 +29,3 @@
   cd api
   stepzen start
   ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-This fitness application is built using node.js, IBM Stepzen, APINinjas, MongoDB, and AWS Lambda. 
-
-Features
-Node.js: Built on react expo
-IBM Stepzen: GraphQL Server to connect to Lambda, APINinjas, and MongoDB
-APINinjas: Workout database API
-MongoDB: Database for users 
-AWS Lambda: Serverless functions used as a data API for MongoDB
-
-Setup
-git clone https://github.com/rob76c/Halcyon.git
-cd Halcyon
-
-Run Project:
-npm install
-npm start
-
-Start Stepzen:
-cd api
-stepzen start
