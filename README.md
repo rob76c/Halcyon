@@ -25,7 +25,7 @@
   ```
 
 3. Start Stepzen(optional):
-   ```bash
+  ```bash
   cd api
   stepzen start
   ```
