@@ -11,25 +11,23 @@ const ProgressGraph = ({ sets = [] }) => {
     
   const points = sets.map((set) => ({
     date: idToDate(set._id),
-    value: set.reps ,
+    value: set.reps * set.weight,
   }));
-  console.log(points);
 
-  const dummyPoints = [
-    {
-      date: new Date("2024-01-01"),
-      value: 6,
-    },
-    {
-      date: new Date("2024-01-02"),
-      value: 8,
-    },
-    {
-      date: new Date("2024-01-03"),
-      value: 10,
-    },
-  ];
-  console.log({date: new Date("2024-01-03")})
+//   const dummyPoints = [
+//     {
+//       date: new Date("2024-01-01"),
+//       value: 6,
+//     },
+//     {
+//       date: new Date("2024-01-02"),
+//       value: 8,
+//     },
+//     {
+//       date: new Date("2024-01-03"),
+//       value: 10,
+//     },
+//   ];
 
   return (
     <View style={styles.container}>
