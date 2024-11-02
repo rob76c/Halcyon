@@ -1,17 +1,71 @@
-Fitness
+# Halcyon
 
-stepzen import curl https://api.api-ninjas.com/v1/exercises?muscle=chest \
--H "X-Api-Key: 8HJBtIifi9YGIBCjcrO2Zw==4eY5U0wkQtH99hCW"
+**Halcyon** is a fitness application designed to provide seamless workout tracking and data management. Built using **Node.js**, **IBM StepZen**, **APINinjas**, **MongoDB**, and **AWS Lambda**, Halcyon integrates powerful backend functionality with a user-friendly frontend interface.
 
-ecuadorx100
-Wjze3fl3y5mrlEol
+## Features
 
-curl 'https://2mo3a6x7cx4lmcmcapjxyjfge40xuyjy.lambda-url.us-east-2.on.aws/'
+- **Node.js:** Built on React Native with Expo for mobile compatibility and a dynamic user interface.
+- **IBM StepZen:** GraphQL server that connects to AWS Lambda, APINinjas, and MongoDB, facilitating efficient data handling and query management.
+- **APINinjas:** Workout database API, serving as the core for workout information and exercise data.
+- **MongoDB:** Database solution for user data management, ensuring secure and efficient data storage.
+- **AWS Lambda:** Serverless functions used as a data API for MongoDB, enabling scalable and efficient backend operations.
 
-curl -X POST https://mxuouhklbpyszq22tifv5fsn3y0aupwt.lambda-url.us-east-2.on.aws/ \
--H "Content-Type: application/json" \
--d '{
-  "exercise": "Pushups",
-  "reps": "20",
-  "weight": "20"
-}'
+## Setup
+
+1. 
+   ```bash
+   git clone https://github.com/rob76c/Halcyon.git
+   cd Halcyon
+   ```
+
+2. Run project 
+  ```bash
+  npm install
+  npm start
+  ```
+
+3. Start Stepzen(optional):
+   ```bash
+  cd api
+  stepzen start
+  ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+This fitness application is built using node.js, IBM Stepzen, APINinjas, MongoDB, and AWS Lambda. 
+
+Features
+Node.js: Built on react expo
+IBM Stepzen: GraphQL Server to connect to Lambda, APINinjas, and MongoDB
+APINinjas: Workout database API
+MongoDB: Database for users 
+AWS Lambda: Serverless functions used as a data API for MongoDB
+
+Setup
+git clone https://github.com/rob76c/Halcyon.git
+cd Halcyon
+
+Run Project:
+npm install
+npm start
+
+Start Stepzen:
+cd api
+stepzen start
